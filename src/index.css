@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-neutral-100 text-secondary font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-secondary font-bold;
+  }
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl;
+  }
+  a {
+    @apply text-primary hover:text-accent transition-colors duration-300;
+  }
+}
+
+/* === Custom Keyframes & Animations === */
+
+/* Soft flowing gradient bg */
+@keyframes gradientFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradientFlow 12s ease infinite;
+}
+
+/* Vibrant quicker flow */
+@keyframes gradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 6s ease infinite;
+}
+
+/* Flowing gradient text */
+@keyframes textGradient {
+  to {
+    background-position: 200% center;
+  }
+}
+.animate-text {
+  background-size: 200% auto;
+  animation: textGradient 4s linear infinite;
+}
+
+/* Horizontal infinite auto-scroll (TikTok/IG story vibe) */
+@keyframes scrollX {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.scroll-infinite {
+  display: flex;
+  width: max-content;
+  animation: scrollX 25s linear infinite;
+}
+.scroll-infinite:hover {
+  animation-play-state: paused; /* pause on hover */
+}
+
+/* === Utility Enhancements === */
+.card-hover {
+  @apply transition-transform duration-300 hover:scale-[1.04] hover:shadow-xl;
+}
+.section-gradient {
+  @apply bg-gradient-to-tr from-blue-50 via-white to-blue-100 animate-gradient-flow;
+}
+.text-gradient {
+  @apply bg-gradient-to-r from-primary via-secondary to-accent text-transparent bg-clip-text animate-text;
+}
+.story-card {
+  @apply flex-shrink-0 w-72 md:w-80 bg-white/60 backdrop-blur-xl rounded-2xl shadow-md p-6 mx-3 card-hover;
+}
