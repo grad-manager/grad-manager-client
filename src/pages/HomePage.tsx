@@ -226,7 +226,7 @@ export default function HomePage() {
     };
 
     window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
+    // return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   // Track mouse position
