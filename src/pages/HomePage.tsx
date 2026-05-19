@@ -31,6 +31,10 @@ interface FeatureModalProps {
   feature: Feature | null;
   onClose: () => void;
 }
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
 
 const FeatureModal: React.FC<FeatureModalProps> = ({ feature, onClose }) => {
   if (!feature) return null;
@@ -196,6 +200,34 @@ export default function HomePage() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (navigator as any).standalone === true;
+
+    if (isStandalone) return; // already installed, do nothing
+
+    let deferredPrompt: BeforeInstallPromptEvent | null = null;
+
+    const handler = (e: Event) => {
+      e.preventDefault();
+      deferredPrompt = e as BeforeInstallPromptEvent; // save it, don't call .prompt() here
+
+      // Trigger after a short delay
+      setTimeout(() => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => {
+            deferredPrompt = null;
+          });
+        }
+      }, 5000);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
 
   // Track mouse position
   useEffect(() => {

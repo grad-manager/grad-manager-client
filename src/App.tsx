@@ -95,10 +95,6 @@ interface AppContentProps {
   onRefreshApplications: () => Promise<void>;
   userSOPStats: UserSOPStats | undefined;
 }
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
-}
 
 const SUBSCRIPTION_LOCK_ALLOWED_PATHS = new Set([
   "/",
@@ -274,31 +270,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     warmPricingContext();
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      (navigator as any).standalone === true;
-
-    if (isStandalone) return; // already installed, do nothing
-
-    let deferredPrompt: BeforeInstallPromptEvent | null = null;
-
-    const handler = (e: Event) => {
-      e.preventDefault();
-      deferredPrompt = e as BeforeInstallPromptEvent; // save it, don't call .prompt() here
-
-      // Trigger after a short delay
-      setTimeout(() => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then(() => {
-            deferredPrompt = null;
-          });
-        }
-      }, 5000);
-    };
-
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
   // --- Application Data ---
   const applicationHooks = useApplications(appCurrentUser, appToken);
