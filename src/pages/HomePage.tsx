@@ -215,18 +215,18 @@ export default function HomePage() {
       deferredPrompt = e as BeforeInstallPromptEvent; // save it, don't call .prompt() here
 
       // Trigger after a short delay
-      setTimeout(() => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then(() => {
-            deferredPrompt = null;
-          });
-        }
-      }, 5000);
+      // setTimeout(() => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          deferredPrompt = null;
+        });
+      }
+      // }, 5000);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
-    // return () => window.removeEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   // Track mouse position
