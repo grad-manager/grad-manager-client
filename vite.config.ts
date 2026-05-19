@@ -30,9 +30,10 @@ export default defineConfig({
       },
 
       manifest: {
-        name: "GradManager - Smarter Way to Manage Graduate School Applications",
+        name: "GradManager",
         short_name: "GradManager",
-        description: "GradManager",
+        description:
+          "GradManager helps you organize your graduate school applications, track deadlines, and manage scholarships with ease.",
         theme_color: "#04040f",
         background_color: "#fff",
         display: "standalone",

@@ -35,7 +35,6 @@ import type { DropResult } from "@hello-pangea/dnd";
 import type { CVRequest } from "./types/documents";
 import { warmPricingContext } from "./utils/pricingContext";
 import { shouldRestrictAppAccess } from "./utils/trial";
-// import { usePWAInstall } from "./hooks/usePWAInstall";
 
 // Lazy imports
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -272,20 +271,35 @@ const App: React.FC = () => {
   const isSubscriptionLocked = shouldRestrictAppAccess(userProfile);
   const appCurrentUser = isSubscriptionLocked ? null : currentUser;
   const appToken = isSubscriptionLocked ? null : token;
-  //   const { canInstall, triggerInstall } = usePWAInstall();
 
   useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault(); // stop browser's default mini-bar
-      (e as BeforeInstallPromptEvent).prompt();
-    };
-    window.addEventListener("beforeinstallprompt", handler);
-
     warmPricingContext();
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (navigator as any).standalone === true;
 
+    if (isStandalone) return; // already installed, do nothing
+
+    let deferredPrompt: BeforeInstallPromptEvent | null = null;
+
+    const handler = (e: Event) => {
+      e.preventDefault();
+      deferredPrompt = e as BeforeInstallPromptEvent; // save it, don't call .prompt() here
+
+      // Trigger after a short delay
+      setTimeout(() => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => {
+            deferredPrompt = null;
+          });
+        }
+      }, 5000);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
-
   // --- Application Data ---
   const applicationHooks = useApplications(appCurrentUser, appToken);
   const {
