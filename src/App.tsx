@@ -268,10 +268,10 @@ const App: React.FC = () => {
   const isSubscriptionLocked = shouldRestrictAppAccess(userProfile);
   const appCurrentUser = isSubscriptionLocked ? null : currentUser;
   const appToken = isSubscriptionLocked ? null : token;
-  const { canInstall, isInstalled, triggerInstall } = usePWAInstall();
+  const { canInstall, triggerInstall } = usePWAInstall();
 
   useEffect(() => {
-    if (isInstalled) return; // already installed, do nothing
+    // if (isInstalled) return; // already installed, do nothing
 
     if (canInstall) {
       // Small delay feels less aggressive than instant popup

@@ -9,18 +9,18 @@ interface BeforeInstallPromptEvent extends Event {
 export function usePWAInstall() {
   const [installEvent, setInstallEvent] =
     useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState(false);
+  //   const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
     // Detects if already running as installed PWA
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      (navigator as any).standalone === true; // iOS
+    // const isStandalone =
+    //   window.matchMedia("(display-mode: standalone)").matches ||
+    //   (navigator as any).standalone === true; // iOS
 
-    if (isStandalone) {
-      setIsInstalled(true);
-      return; // don't bother listening for the prompt
-    }
+    // if (isStandalone) {
+    //   setIsInstalled(true);
+    //   return; // don't bother listening for the prompt
+    // }
 
     const handler = (e: Event) => {
       e.preventDefault(); // stop browser's default mini-bar
@@ -28,7 +28,7 @@ export function usePWAInstall() {
     };
 
     // Fires when PWA is successfully installed
-    window.addEventListener("appinstalled", () => setIsInstalled(true));
+    // window.addEventListener("appinstalled", () => setIsInstalled(true));
     window.addEventListener("beforeinstallprompt", handler);
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
@@ -40,5 +40,5 @@ export function usePWAInstall() {
     if (outcome === "accepted") setInstallEvent(null);
   };
 
-  return { canInstall: !!installEvent, isInstalled, triggerInstall };
+  return { canInstall: !!installEvent, triggerInstall };
 }
