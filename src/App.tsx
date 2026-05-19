@@ -35,7 +35,7 @@ import type { DropResult } from "@hello-pangea/dnd";
 import type { CVRequest } from "./types/documents";
 import { warmPricingContext } from "./utils/pricingContext";
 import { shouldRestrictAppAccess } from "./utils/trial";
-import { usePWAInstall } from "./hooks/usePWAInstall";
+// import { usePWAInstall } from "./hooks/usePWAInstall";
 
 // Lazy imports
 const HomePage = lazy(() => import("./pages/HomePage"));
