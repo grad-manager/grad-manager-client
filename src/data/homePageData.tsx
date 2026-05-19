@@ -12,6 +12,8 @@ import {
   FaVideo,
 } from "react-icons/fa";
 
+
+// TODO: Replace with actual images once available in the assets folder
 // Import local images for platform features (These should remain local imports for bundler optimization)
 import scholarshipImage from "../assets/images/web 5.png";
 import calendarImage from "../assets/images/web 5.png";

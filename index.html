@@ -1,60 +1,100 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <!-- ✅ Core Metadata -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GradManager – Smarter Way to Manage Graduate School Applications</title>
-  <meta name="description" content="GradManager helps you organize your graduate school applications, track deadlines, and manage scholarships with ease." />
-  <meta name="keywords" content="grad school, scholarships, university, graduate management, applications, study abroad, academic planner" />
-  <link rel="canonical" href="https://www.gradmanagers.com/" />
+  <head>
+    <!-- ✅ Core Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      GradManager – Smarter Way to Manage Graduate School Applications
+    </title>
+    <meta
+      name="description"
+      content="GradManager helps you organize your graduate school applications, track deadlines, and manage scholarships with ease."
+    />
+    <meta
+      name="keywords"
+      content="grad school, scholarships, university, graduate management, applications, study abroad, academic planner"
+    />
+    <link rel="canonical" href="https://www.gradmanagers.com/" />
 
-  <!-- ✅ Favicons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" content="#4F46E5" />
+    <!-- ✅ Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#4F46E5" />
 
-  <!-- ✅ Open Graph / Social -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.gradmanagers.com/" />
-  <meta property="og:title" content="GradManager – Manage Your Grad School Journey" />
-  <meta property="og:description" content="Track scholarships, deadlines, and applications with GradManager’s intuitive dashboard." />
-  <meta property="og:image" content="https://www.gradmanagers.com/social-share-image.png" />
+    <!-- ✅ Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.gradmanagers.com/" />
+    <meta
+      property="og:title"
+      content="GradManager – Manage Your Grad School Journey"
+    />
+    <meta
+      property="og:description"
+      content="Track scholarships, deadlines, and applications with GradManager’s intuitive dashboard."
+    />
+    <meta
+      property="og:image"
+      content="https://www.gradmanagers.com/social-share-image.png"
+    />
 
-  <!-- ✅ Twitter Meta -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GradManager – Smarter Way to Manage Graduate School Applications" />
-  <meta name="twitter:description" content="Organize deadlines and manage grad school applications easily with GradManager." />
-  <meta name="twitter:image" content="https://www.gradmanagers.com/social-share-image.png" />
-  <meta name="twitter:creator" content="@gradmanager" />
+    <!-- ✅ Twitter Meta -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="GradManager – Smarter Way to Manage Graduate School Applications"
+    />
+    <meta
+      name="twitter:description"
+      content="Organize deadlines and manage grad school applications easily with GradManager."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.gradmanagers.com/social-share-image.png"
+    />
+    <meta name="twitter:creator" content="@gradmanager" />
 
-  <!-- ✅ Structured Data (Google Rich Results) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "GradManager",
-    "url": "https://www.gradmanagers.com",
-    "logo": "https://www.gradmanagers.com/logo.png",
-    "sameAs": [
-      "https://twitter.com/gradmanager",
-      "https://www.linkedin.com/company/gradmanager"
-    ]
-  }
-  </script>
+    <!-- IOS PWA Meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="GradManager" />
 
-  <!-- ✅ Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
-  <link rel="prefetch" href="https://www.gradmanagers.com/social-share-image.png" />
-</head>
+    <!-- ✅ Structured Data (Google Rich Results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "GradManager",
+        "url": "https://www.gradmanagers.com",
+        "logo": "https://www.gradmanagers.com/logo.png",
+        "sameAs": [
+          "https://twitter.com/gradmanager",
+          "https://www.linkedin.com/company/gradmanager"
+        ]
+      }
+    </script>
 
-<body class="bg-neutralLight text-secondary">
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
+    <!-- ✅ Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="prefetch"
+      href="https://www.gradmanagers.com/social-share-image.png"
+    />
+  </head>
+
+  <body class="bg-neutralLight text-secondary">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
