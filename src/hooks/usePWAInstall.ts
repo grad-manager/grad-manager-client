@@ -24,7 +24,7 @@ export function usePWAInstall() {
 
     const handler = (e: Event) => {
       e.preventDefault(); // stop browser's default mini-bar
-      setInstallEvent(e as BeforeInstallPromptEvent);
+      (e as BeforeInstallPromptEvent).prompt();
     };
 
     // Fires when PWA is successfully installed

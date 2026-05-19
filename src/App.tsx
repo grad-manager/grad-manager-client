@@ -96,6 +96,10 @@ interface AppContentProps {
   onRefreshApplications: () => Promise<void>;
   userSOPStats: UserSOPStats | undefined;
 }
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
 
 const SUBSCRIPTION_LOCK_ALLOWED_PATHS = new Set([
   "/",
@@ -268,18 +272,19 @@ const App: React.FC = () => {
   const isSubscriptionLocked = shouldRestrictAppAccess(userProfile);
   const appCurrentUser = isSubscriptionLocked ? null : currentUser;
   const appToken = isSubscriptionLocked ? null : token;
-  const { canInstall, triggerInstall } = usePWAInstall();
+  //   const { canInstall, triggerInstall } = usePWAInstall();
 
   useEffect(() => {
-    // if (isInstalled) return; // already installed, do nothing
+    const handler = (e: Event) => {
+      e.preventDefault(); // stop browser's default mini-bar
+      (e as BeforeInstallPromptEvent).prompt();
+    };
+    window.addEventListener("beforeinstallprompt", handler);
 
-    if (canInstall) {
-      // Small delay feels less aggressive than instant popup
-      const timer = setTimeout(() => triggerInstall(), 3000);
-      return () => clearTimeout(timer);
-    }
     warmPricingContext();
-  }, [canInstall]);
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
 
   // --- Application Data ---
   const applicationHooks = useApplications(appCurrentUser, appToken);
