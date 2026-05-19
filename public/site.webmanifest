@@ -1,7 +1,7 @@
 {
   "name": "GradManager - Smarter Way to Manage Graduate School Applications",
   "short_name": "GradManager",
-  "description": "GradManager helps you organize your graduate school applications, track deadlines, and manage scholarships with ease.",
+  "description": "GradManager",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff",

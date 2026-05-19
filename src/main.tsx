@@ -15,7 +15,6 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <Router>
-      {" "}
       {/* Router must wrap everything that uses useNavigate */}
       <AuthProvider>
         {/* App will now contain the logic to fetch data and wrap itself in ModalProvider */}
