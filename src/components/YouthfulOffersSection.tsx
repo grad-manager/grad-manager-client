@@ -180,9 +180,11 @@ export default function YouthfulOffersSection({
   const [fetchedFirstName, setFetchedFirstName] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
-  const displayedFeatures = showAll ? platformFeatures : platformFeatures.slice(0, 4);
-  const isSubscriptionLocked = !!currentUser && shouldRestrictAppAccess(userProfile);
-
+  const displayedFeatures = showAll
+    ? platformFeatures
+    : platformFeatures.slice(0, 4);
+  const isSubscriptionLocked =
+    !!currentUser && shouldRestrictAppAccess(userProfile);
   useEffect(() => {
     if (!currentUser?.uid) {
       setFetchedFirstName(null);
@@ -191,10 +193,14 @@ export default function YouthfulOffersSection({
 
     const fetchUserProfile = async () => {
       try {
-        const userDoc = await getDoc(doc(db, "users", currentUser.uid as string));
+        const userDoc = await getDoc(
+          doc(db, "users", currentUser.uid as string),
+        );
         if (userDoc.exists()) {
           const data = userDoc.data();
-          setFetchedFirstName(data.firstName || data.displayName?.split(" ")[0] || null);
+          setFetchedFirstName(
+            data.firstName || data.displayName?.split(" ")[0] || null,
+          );
           return;
         }
       } catch (error) {
@@ -220,7 +226,9 @@ export default function YouthfulOffersSection({
   const handleToggle = () => {
     if (showAll && sectionRef.current) {
       const topPosition =
-        sectionRef.current.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET_PX;
+        sectionRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        NAVBAR_OFFSET_PX;
       window.scrollTo({ top: topPosition, behavior: "smooth" });
     }
 
@@ -244,7 +252,9 @@ export default function YouthfulOffersSection({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {currentUser ? `${userGreetingName}'s Dashboard` : "What Grad Manager Offers"}
+          {currentUser
+            ? `${userGreetingName}'s Dashboard`
+            : "What Grad Manager Offers"}
         </motion.h2>
 
         <motion.p
@@ -275,10 +285,14 @@ export default function YouthfulOffersSection({
                   variants={itemVariants}
                   className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg border ${styles.border} ${styles.bg} hover:scale-[1.02] transition-all duration-500`}
                 >
-                  <h4 className={`font-bold text-base sm:text-lg ${styles.text} mb-2`}>
+                  <h4
+                    className={`font-bold text-base sm:text-lg ${styles.text} mb-2`}
+                  >
                     {card.title}
                   </h4>
-                  <p className="text-sm text-gray-600 line-clamp-3">{card.desc}</p>
+                  <p className="text-sm text-gray-600 line-clamp-3">
+                    {card.desc}
+                  </p>
                   <Link
                     to={resolveCardLink(card.link)}
                     className={`mt-4 inline-block px-4 py-2 sm:px-5 sm:py-2 rounded-full text-sm sm:text-base font-semibold text-white ${styles.btn} ${styles.btnHover} transition`}
@@ -340,7 +354,9 @@ export default function YouthfulOffersSection({
                         </p>
 
                         <button
-                          onClick={() => setModalFeature(featureForModal as Feature)}
+                          onClick={() =>
+                            setModalFeature(featureForModal as Feature)
+                          }
                           className="mt-3 sm:mt-4 self-start text-sm font-semibold text-blue-600 hover:underline"
                         >
                           See More
