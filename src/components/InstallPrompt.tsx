@@ -29,7 +29,7 @@ export default function InstallPrompt({
 
   return (
     <AnimatePresence>
-      {event !== null && pathname === "/" && (
+      {promptEvent !== null && pathname === "/" && (
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
