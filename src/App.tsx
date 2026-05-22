@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // src/App.tsx
-import React, { lazy, Suspense, useCallback, useEffect } from "react";
+import React, { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import {
   Navigate,
   Route,
@@ -35,6 +35,8 @@ import type { DropResult } from "@hello-pangea/dnd";
 import type { CVRequest } from "./types/documents";
 import { warmPricingContext } from "./utils/pricingContext";
 import { shouldRestrictAppAccess } from "./utils/trial";
+import InstallPrompt from "./components/InstallPrompt";
+import type { BeforeInstallPromptEvent } from "./types/BeforeInstallPrompt";
 
 // Lazy imports
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -267,9 +269,25 @@ const App: React.FC = () => {
   const isSubscriptionLocked = shouldRestrictAppAccess(userProfile);
   const appCurrentUser = isSubscriptionLocked ? null : currentUser;
   const appToken = isSubscriptionLocked ? null : token;
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {
     warmPricingContext();
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (navigator as any).standalone === true;
+
+    if (isStandalone) return; // already installed, do nothing
+
+    // Save event
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent); // save it, don't call .prompt() here
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
   // --- Application Data ---
   const applicationHooks = useApplications(appCurrentUser, appToken);
@@ -315,7 +333,7 @@ const App: React.FC = () => {
   return (
     <>
       <ToastContainer position="top-right" autoClose={5000} />
-
+      <InstallPrompt promptEvent={deferredPrompt} />
       <ModalProvider
         applications={applications}
         onDragEnd={onDragEnd as (result: any) => void}

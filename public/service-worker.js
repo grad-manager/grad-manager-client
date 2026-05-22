@@ -1,5 +1,5 @@
 // service-worker.js
-const CACHE_NAME = "gradmanager-pwa-v1.1";
+const CACHE_NAME = "gradmanager-pwa-v2";
 const APP_SHELL = [
   "/",
   "/index.html",
