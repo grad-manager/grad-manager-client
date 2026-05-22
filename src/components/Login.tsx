@@ -27,7 +27,8 @@ const Login: React.FC = () => {
   useEffect(() => {
     if (currentUser) {
       // Use replace to prevent the user from navigating back to the login page
-      navigate("/", { replace: true });
+      // navigate("/", { replace: true });
+      window.location.replace("/");
     }
   }, [currentUser, navigate]);
 
