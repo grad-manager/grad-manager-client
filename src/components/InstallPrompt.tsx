@@ -24,7 +24,7 @@ export default function InstallPrompt() {
     await event.prompt();
 
     const { outcome } = await (event as any).userChoice;
-    outcome !== "dismissed" && closePrompt();
+    closePrompt();
     console.log("User choice:", outcome);
   }
 
