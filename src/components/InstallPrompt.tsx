@@ -1,21 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddToMobileChrome from "./AddToMobileChrome";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { BeforeInstallPromptEvent } from "../types/BeforeInstallPrompt";
 import { useLocation } from "react-router-dom";
 
-export default function InstallPrompt({
-  promptEvent,
-}: {
-  promptEvent: BeforeInstallPromptEvent | null;
-}) {
-  const [event, setEvent] = useState<BeforeInstallPromptEvent | null>();
+export default function InstallPrompt() {
+  const [event, setEvent] = useState<BeforeInstallPromptEvent | null>(
+    () => (window as any).__installPrompt ?? null,
+  );
   const pathname = useLocation().pathname;
-
-  useEffect(() => {
-    setEvent(promptEvent);
-  }, [promptEvent]);
+  const isStandalone =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    (navigator as any).standalone === true;
 
   // Close Prompt
   const closePrompt = () => {
@@ -31,9 +28,10 @@ export default function InstallPrompt({
     console.log("User choice:", outcome);
   }
 
+  // Only Show Install prompt when event is defined, standalone is false and pathname is /
   return (
     <AnimatePresence>
-      {event !== null && pathname === "/" && (
+      {event !== null && !isStandalone && pathname === "/" && (
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
