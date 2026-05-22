@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import AddToMobileChrome from "./AddToMobileChrome";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -10,12 +10,12 @@ export default function InstallPrompt({
 }: {
   promptEvent: BeforeInstallPromptEvent | null;
 }) {
-  const [event, setEvent] = useState(promptEvent);
+  // const [event, setEvent] = useState(promptEvent);
   const pathname = useLocation().pathname;
 
   // Close Prompt
   const closePrompt = () => {
-    setEvent(null);
+    // setEvent(null);
   };
 
   async function handleInstallClick() {
