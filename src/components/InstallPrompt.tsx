@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState } from "react";
 import AddToMobileChrome from "./AddToMobileChrome";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -10,26 +10,26 @@ export default function InstallPrompt({
 }: {
   promptEvent: BeforeInstallPromptEvent | null;
 }) {
-  // const [event, setEvent] = useState(promptEvent);
+  const [event, setEvent] = useState(promptEvent);
   const pathname = useLocation().pathname;
 
   // Close Prompt
   const closePrompt = () => {
-    // setEvent(null);
+    setEvent(null);
   };
 
   async function handleInstallClick() {
-    if (!promptEvent) return;
-    await promptEvent.prompt();
+    if (!event) return;
+    await event.prompt();
 
-    const { outcome } = await (promptEvent as any).userChoice;
+    const { outcome } = await (event as any).userChoice;
     outcome !== "dismissed" && closePrompt();
     console.log("User choice:", outcome);
   }
 
   return (
     <AnimatePresence>
-      {promptEvent !== null && pathname === "/" && (
+      {event !== null && pathname === "/" && (
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
