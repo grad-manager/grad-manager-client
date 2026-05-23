@@ -6,6 +6,7 @@ import { useInstallPWA } from "../hooks/useInstallPWA";
 export default function InstallPrompt() {
   const { isStandalone, event, pathname, handleInstallClick, closePrompt } =
     useInstallPWA();
+  console.log(event, isStandalone, pathname);
 
   // Only Show Install prompt when event is defined, standalone is false and pathname is /
   return (

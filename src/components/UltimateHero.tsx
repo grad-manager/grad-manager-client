@@ -99,6 +99,8 @@ export default function UltimateHero({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { handleInstallClick, isStandalone } = useInstallPWA();
   const [showInstall, setShowInstall] = useState(false);
+  const navigatorAgent = window.navigator.userAgent;
+  const isIOS = navigatorAgent.match(/(iPad|iPhone|iPod)/i);
 
   const handleMove = (e: React.MouseEvent) => {
     const el = containerRef.current;
@@ -215,9 +217,7 @@ export default function UltimateHero({
                 <>
                   <button
                     onClick={
-                      !isStandalone
-                        ? handleInstallClick
-                        : () => setShowInstall(true)
+                      !isIOS ? () => setShowInstall(true) : handleInstallClick
                     }
                     className="relative inline-flex items-center gap-3 justify-center px-10 py-3 rounded-full hover:text-white text-primary border font-semibold border-blue-600 shadow-lg hover:border-none hover:bg-gray-500 hover:scale-105 transform transition"
                   >

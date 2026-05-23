@@ -1,9 +1,6 @@
 import { BadgeCheck, Share, SquarePlus } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-// const isIOS =
-//   /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-
 interface IOSInstallGuideProps {
   appName?: string;
   appIcon?: string;

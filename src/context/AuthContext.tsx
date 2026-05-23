@@ -231,6 +231,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
           startDate: new Date().toISOString(),
           endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
         };
+        const timestamp = new Date(
+          new Date().setMonth(new Date().getMonth() + 3),
+        );
 
         const userDataWithDefaults: UserProfileInternal = {
           ...(cleanedData as any),
@@ -246,12 +249,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
           },
           applicationsCount: 0,
           subscription: {
-            plan: "free",
+            plan: "pro", // Value supposed to be free, all users are for now given pro accounts
             status: "active",
             startDate: new Date().toISOString(),
-            expirationDate: new Date(
-              Date.now() + 90 * 24 * 60 * 60 * 1000,
-            ).toISOString(),
+            expirationDate: timestamp.toISOString(),
           },
           trial,
         };

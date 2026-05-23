@@ -260,8 +260,7 @@ const Signup: React.FC = () => {
   useEffect(() => {
     // If the user is already logged in, navigate away.
     if (currentUser) {
-      // navigate('/awaiting-verification', { replace: true });
-      window.location.replace("/awaiting-verification");
+      navigate("/awaiting-verification", { replace: true });
     }
   }, [currentUser, navigate]);
 
